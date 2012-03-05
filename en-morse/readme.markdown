@@ -53,6 +53,9 @@ wav and used. (`ffmpeg -i infile outfile` will recognize extensions)
 
 * Didnt put any effort in checking it is right.
 
+* Communicating efficiently to stuff like the arduino. 
+  Interfacing with [this](http://arduino.cc/playground/Code/Morse).
+
 ### Author
 
 Jasper den Ouden
