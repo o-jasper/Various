@@ -18,6 +18,8 @@ Does the reverse, not yet implemented.
 Uses SDL sound to make the sound, defaultly using
 tick.wav and longtick.wav as sounds, but they can be replaced. Arguments are:
 
+The first one uses already `en-morse`d stuff, the latter can take text.
+
 1. delay between letters
 
 2. input morse file, text file respectively for morse-sound, 
