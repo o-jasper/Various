@@ -6,7 +6,7 @@
 
 int s_delay,l_delay;
 
-void morse_sound(const char* str)
+void morse_sound(char* str)
 { 
   for( char* c= str ; *c !='\0' ; c++ )
     { switch(*c)

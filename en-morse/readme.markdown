@@ -3,6 +3,8 @@
 
 Stuff to read and sound morse codes.
 
+Compile using `make`
+
 ### en-morse
 
 Turns text into '.' and '_', representing morse code.
@@ -15,10 +17,10 @@ Does the reverse, not yet implemented.
 
 ### morse-sound, en-morse-sound
 
+The first one uses already `en-morse`d stuff, the latter can take text.
+
 Uses SDL sound to make the sound, defaultly using
 tick.wav and longtick.wav as sounds, but they can be replaced. Arguments are:
-
-The first one uses already `en-morse`d stuff, the latter can take text.
 
 1. delay between letters
 
@@ -27,27 +29,28 @@ en-morse-sound (overriding stdin)
 
 3. override short .wav sound file. Default "tick.wav", you have to provide it.
 
-4. override long .wav sound file. Default "longtick.wav", you have to provide it.
+4. override long .wav sound file. Default "longtick.wav", you have to provide
+   it.
 
 5. short-delay 
 
 6. long delay.
 
 ### TODO
-I find the project is probably a bit of a waste of time, so these won't happen by my hand.
+I find the project is probably a bit of a waste of time, so these won't happen
+by my hand.
 
 * get default tick.wav and longtick.wav with acceptable licenses.
-(git is currently unaware of these) if you run linux with a lot installed you can try look
-under `/usr/share/sounds/` and get them there, For instance 
-`/usr/share/sounds/gnome/default/alerts/` .. `drip.ogg` and `glass.ogg` can be converted to 
-wav and used. (`ffmpeg -i infile outfile` will recognize extensions)
+(git is currently unaware of these) if you run linux with a lot installed you
+can try look under `/usr/share/sounds/` and get them there, For instance 
+`/usr/share/sounds/gnome/default/alerts/` .. `drip.ogg` and `glass.ogg` can be
+converted to wav and used. (`ffmpeg -i infile outfile` will recognize 
+extensions)
 
-* potential issue, sometimes you have to refer to SDL as SDL/SDL.h sometimes just SDL.h.
-  (my case the first)
+* potential issue, sometimes you have to refer to SDL as SDL/SDL.h sometimes 
+  just SDL.h. (my case the first)
 
 * make programs respond to '-h'.
-
-* make makefile and or such.(have compile.sh already)
 
 * Make decoder.(and test)
 
