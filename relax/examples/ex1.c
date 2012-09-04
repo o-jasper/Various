@@ -1,6 +1,6 @@
 // Author: Jasper den Ouden
 //  Placed in public domain.
-#include "pre-main.c"
+#include "../pre-main.c"
 
 int step_cnt=0;
 void step ()
@@ -26,4 +26,4 @@ void step ()
     }
 }
 
-#include "main.c"
+#include "../main.c"

@@ -20,13 +20,14 @@ speed; over-relaxation can still do one pixel/turn at maximum.
 
 ## Compilation and use 
 
-See ex1.sh (how) to compile, running it will compile that example.
+See `examples/ex1.sh` (how) to compile, running it will compile that example.
+There is also a makefil.
 
 To use just run the executable. To change sources/constraints, see the 
 example, you can replace sources and constrains there, with mk_fixed_Rect to 
 specify the areas as argument of 'source' and 'constraint'.
 
-Only dependency is base SDL.
+Only dependency is base SDL. Note that this mostly just example..
 
 ## Files
 <!--markup doesnt have this??--> 
