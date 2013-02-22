@@ -10,3 +10,5 @@ en-morse/tick.wav
 prog-select/prog-select
 relax/examples/ex1
 
+hashtable/cons_test
+hashtable/hash4str_test
