@@ -21,7 +21,7 @@ speed; over-relaxation can still do one pixel/turn at maximum.
 ## Compilation and use 
 
 See `examples/ex1.sh` (how) to compile, running it will compile that example.
-There is also a makefil.
+There is also a makefile.
 
 To use just run the executable. To change sources/constraints, see the 
 example, you can replace sources and constrains there, with mk_fixed_Rect to 

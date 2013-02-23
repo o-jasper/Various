@@ -13,7 +13,7 @@ With no arguments, it reads from stdin, otherwise from given file.
 
 ### de-morse
 
-Does the reverse, not yet implemented.
+Does the reverse, conspicuously **not yet implemented**.
 
 ### morse-sound, en-morse-sound
 
