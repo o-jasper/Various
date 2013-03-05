@@ -50,7 +50,7 @@ extensions)
 * potential issue, sometimes you have to refer to SDL as SDL/SDL.h sometimes 
   just SDL.h. (my case the first)
 
-* make programs respond to '-h'.
+* make programs respond to '-h'. Man page.
 
 * Make decoder.(and test)
 
