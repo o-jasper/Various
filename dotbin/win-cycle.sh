@@ -12,6 +12,7 @@ EXEC_IF_NONE=$3
 
 mkdir -p /tmp/win-activate/
 I=`cat /tmp/win-activate/$CAT_NAME` #Contains index of current window.
+rm /tmp/win-activate/* #Dont want more state than just the one.
 if [ "$I" == "" ]; then
     I=1
 else

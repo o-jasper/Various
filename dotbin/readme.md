@@ -15,29 +15,29 @@ Will get all the entries from `wmctrl -l -p` relevant to those.
     
     wmctrl -i -a `win-of-name.sh firefox` #To open the first one.
 
-## win-activate.sh
+## win-cycle.sh
 Also takes a comma-separated list of program names, but cycles through the
 windows. If none of the programs in the list has a window, attempts to run the
 first element of the (coma-separated)list.
 
     #Cycle or otherwise start firefox.
-    win-activate.sh firefox,epiphany,netsurf,opera,liferea
+    win-cycle.sh firefox,epiphany,netsurf,opera,liferea
     
 Alternatively it can specify a name for the set of options, and specify a more
 specific command to run.(though on the latter some stuff has been bothering me.)
     
-    Mod4 z :Exec win-activate.sh editors emacs,openscad,gimp "emacs -mm&"
+    Mod4 z :Exec win-cycle.sh editors emacs,openscad,gimp "emacs -mm&"
     
 ### What i use of those two:
 Basically i have the following bound into `~/.fluxbox/keys`. Presumably the
 lists will lengthen a bit.
 
-    Mod4 c :Exec win-activate.sh gnome-terminal
-    Mod4 v :Exec win-activate.sh claws-mail
-    Mod4 x :Exec win-activate.sh gmpc,totem
+    Mod4 c :Exec win-cycle.sh gnome-terminal
+    Mod4 v :Exec win-cycle.sh claws-mail
+    Mod4 x :Exec win-cycle.sh gmpc,totem
     
     #No sense in starting an evince instance empty.
-    Mod4 s :Exec win-activate.sh wmctrl -i -a `win-of-name.sh evince | head -n 1`
+    Mod4 s :Exec win-cycle.sh wmctrl -i -a `win-of-name.sh evince | head -n 1`
     
 
 ## screenshot.sh
