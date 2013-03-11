@@ -24,7 +24,7 @@ first element of the (coma-separated)list.
     win-cycle.sh firefox,epiphany,netsurf,opera,liferea
     
 Alternatively it can specify a name for the set of options, and specify a more
-specific command to run.(though on the latter some stuff has been bothering me.)
+specific command to run.
     
     Mod4 z :Exec win-cycle.sh editors emacs,openscad,gimp "emacs -mm&"
     
@@ -35,10 +35,7 @@ lists will lengthen a bit.
     Mod4 c :Exec win-cycle.sh gnome-terminal
     Mod4 v :Exec win-cycle.sh claws-mail
     Mod4 x :Exec win-cycle.sh gmpc,totem
-    
-    #No sense in starting an evince instance empty.
-    Mod4 s :Exec win-cycle.sh wmctrl -i -a `win-of-name.sh evince | head -n 1`
-    
+    Mod4 s :Exec win-cycle.sh reader evince, 'echo' #Dont want readers without any file.
 
 ## screenshot.sh
 Immediately takes a screenshot, meant to be used as key binding.
