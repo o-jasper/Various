@@ -1,0 +1,4 @@
+#!/bin/bash
+#Append to readme for quick notes.
+
+echo $@ >> readme.md

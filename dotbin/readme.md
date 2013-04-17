@@ -1,7 +1,7 @@
 
 # Bunch of stuff in by `~/.bin` directory
-I have added  to `PWD=$PWD:~/.bin/` to `~/.bashrc` of course. Some of these are
-attached to key bindings. How to set those depends on your windowing system.
+I have added  to `PWD=$PWD:~/.bin/` to `~/.bashrc`. Some of these are attached
+to key bindings. How to set those depends on your windowing system.
 
 I put all these scripts into the public domain.
 
@@ -54,3 +54,4 @@ Runs `mplayer` in order make pictures.(you have to trigger it) Puts it in
 `~/pics/from-cam/`.
 
 I suppose i should want to immediately take a picture.
+## otherwise Some convenience stuff not worth mentioning
