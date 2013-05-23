@@ -1,0 +1,24 @@
+#!/bin/bash
+# Get photos from casio SD card and umounts.
+#Unfortunately will need modifications for what your particular camera does.
+
+#Go to directory for it.
+cd ~/pics/100CASIO/
+
+#sudo mount /dev/sdb1 sd/
+DIR=/mnt/usbstick/
+
+CUR=`cat cur`
+FROM=`ls $DIR/DCIM/100CASIO/ |grep -n $CUR | cut -f1 -d':'`
+
+for el in `ls $DIR/DCIM/100CASIO/ |tail -n+$FROM`; do
+    cp  $DIR/DCIM/100CASIO/$el $el
+    chmod -x $el
+    CUR=$el
+done
+sudo umount /mnt/usbstick/
+echo $CUR > cur
+
+cd - #Go back, cat3 goes into the local pictures.
+mkdir -p pics/
+mv ~/pics/100CASIO/CIMG*.JPG pics/
