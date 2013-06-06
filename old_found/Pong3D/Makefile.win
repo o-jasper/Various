@@ -1,0 +1,30 @@
+# Project: Pong3D
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = 
+OBJ  = SDL_main.o $(RES)
+LINKOBJ  = SDL_main.o $(RES)
+LIBS =  -L"C:/JASPER/UTILITIES/DEV-CPP/lib" -mwindows -l mingw32 -l SDLmain -l SDL  -l glu32  -l opengl32  -g3 
+INCS =  -I"C:/JASPER/UTILITIES/DEV-CPP/include" 
+CXXINCS =  -I"C:/JASPER/UTILITIES/DEV-CPP/lib/gcc/mingw32/3.4.2/include"  -I"C:/JASPER/UTILITIES/DEV-CPP/include/c++/3.4.2/backward"  -I"C:/JASPER/UTILITIES/DEV-CPP/include/c++/3.4.2/mingw32"  -I"C:/JASPER/UTILITIES/DEV-CPP/include/c++/3.4.2"  -I"C:/JASPER/UTILITIES/DEV-CPP/include" 
+BIN  = Pong3D.exe
+CXXFLAGS = $(CXXINCS)   -g3
+CFLAGS = $(INCS) -Dmain=SDL_main   -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before Pong3D.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "Pong3D.exe" $(LIBS)
+
+SDL_main.o: SDL_main.cpp
+	$(CPP) -c SDL_main.cpp -o SDL_main.o $(CXXFLAGS)
