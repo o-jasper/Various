@@ -1,0 +1,12 @@
+#!/bin/bash
+#Placed in public domain
+
+for el in $@; do
+    FILE=/tmp/`date +%s`_$RANDOM
+  #Strip metadata
+    mat $el
+  #Embed random shit and forget.
+    echo $RANDOM$RANDOM$RANDOM$RANDOM$RANDOM > $FILE
+    steghide embed -ef $FILE  -cf $el -p $RANDOM
+    rm $FILE
+done

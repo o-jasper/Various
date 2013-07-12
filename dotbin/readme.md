@@ -37,6 +37,13 @@ lists will lengthen a bit.
     Mod4 x :Exec win-cycle.sh gmpc,totem
     Mod4 s :Exec win-cycle.sh reader evince, 'echo' #Dont want readers without any file.
 
+## shide
+Strips metadata with [`mat`](https://mat.boum.org), and uses
+[`steghide`](http://steghide.sourceforge.net)
+to hide random data in it and toss it away. This is done in order to prevent
+frequency analysis when using images to send messages.(In case they can detect 
+that data is hidden in images)
+
 ## screenshot.sh
 Immediately takes a screenshot, meant to be used as key binding.
 
