@@ -1,0 +1,44 @@
+#!/bin/bash
+#'Poor mans' shitty gcode plotting 
+# (well, if a poor man can see this, he probably could have  downloaded
+#  the many  gcode viewers out there)
+#
+#Note: NOT good, probably doesnt show everything well
+#
+#Use as pipe; for instance `cat some.gcode | gcode-gnuplot xyn`
+
+g()
+{  grep 'G1 ' | tr X ' ' | tr Y ' ' | tr Z ' ' }
+
+xy()
+{   g | gnuplot -p -e "plot '-' using 2:3 with dots" ; }
+
+x()
+{   g | gnuplot -p -e "plot '-' using 2 with dots" ; }
+
+y()
+{   g | gnuplot -p -e "plot '-' using 3 with dots" ; }
+
+xyn()
+{   g | gnuplot -p -e "splot '-' using 2:3:0 with dots" ; }
+
+z()
+{   g | gnuplot -p -e "plot '-' using 2" ; }
+
+case $1 in
+    xyn)
+        xyn ;;
+    xy)
+        xy ;;
+    z)
+        z ;;
+    '') 
+        xy ;;
+    x)
+        x ;;
+    y)
+        y ;;
+    #TODO e
+    *)
+        echo "Dont know about plotting $1 about gcodes"  >> /dev/stderr
+esac
