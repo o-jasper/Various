@@ -7,23 +7,38 @@
 #
 #Use as pipe; for instance `cat some.gcode | gcode-gnuplot xyn`
 
+ARG=`echo "$@" | cut -s -f 2- -d' '`
+echo $ARG
+if [ "$ARG" == "" ]; then
+    ARG='with dots'
+fi
+
 g()
-{  grep 'G1 ' | tr X ' ' | tr Y ' ' | tr Z ' ' }
+{  grep 'G1 ' | tr X ' ' | tr Y ' ' | tr Z ' '
+}
+gz()
+{  grep G1 | grep Z | tr Z ' '
+}
 
 xy()
-{   g | gnuplot -p -e "plot '-' using 2:3 with dots" ; }
+{   g | gnuplot -p -e "plot '-' using 2:3 $ARG"
+}
 
 x()
-{   g | gnuplot -p -e "plot '-' using 2 with dots" ; }
+{   g | gnuplot -p -e "plot '-' using 2 $ARG" 
+}
 
 y()
-{   g | gnuplot -p -e "plot '-' using 3 with dots" ; }
+{   g | gnuplot -p -e "plot '-' using 3 $ARG"
+}
 
 xyn()
-{   g | gnuplot -p -e "splot '-' using 2:3:0 with dots" ; }
+{   g | gnuplot -p -e "splot '-' using 2:3:0 $ARG"
+}
 
 z()
-{   g | gnuplot -p -e "plot '-' using 2" ; }
+{   gz | gnuplot -p -e "plot '-' using 2 $ARG"
+}
 
 case $1 in
     xyn)
@@ -32,13 +47,16 @@ case $1 in
         xy ;;
     z)
         z ;;
-    '') 
-        xy ;;
     x)
         x ;;
     y)
         y ;;
-    #TODO e
+    g)
+        g;;
+    gz)
+        gz ;;
+   #TODO e
     *)
-        echo "Dont know about plotting $1 about gcodes"  >> /dev/stderr
+        echo "Dont know about plotting $1 about gcodes"  >> /dev/stderr ;;
+    
 esac
