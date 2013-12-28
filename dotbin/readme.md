@@ -61,4 +61,6 @@ Runs `mplayer` in order make pictures.(you have to trigger it) Puts it in
 `~/pics/from-cam/`.
 
 I suppose i should want to immediately take a picture.
-## otherwise Some convenience stuff not worth mentioning
+
+## Otherwise
+Some convenience stuff not worth mentioning here.
