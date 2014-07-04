@@ -2,11 +2,13 @@
 #Placed in public domain
 
 for el in $@; do
-    FILE=/tmp/`date +%s`_$RANDOM
+    FILE=/tmp/$(date +%s)_$RANDOM
   #Strip metadata
     mat $el
   #Embed random shit and forget.
-    echo $RANDOM$RANDOM$RANDOM$RANDOM$RANDOM > $FILE
-    steghide embed -ef $FILE  -cf $el -p $RANDOM
-    rm $FILE
+    head -n 100 /dev/urandom > $FILE
+    steghide embed -ef $FILE  -cf $el -p "$(head -n 40 /dev/urandom |hexdump |tr -d '\n')"
+  # Takes a little longer, but just incase the computer is configured to keep
+  # /tmp around or is on for long periods.
+    wipe $FILE
 done
