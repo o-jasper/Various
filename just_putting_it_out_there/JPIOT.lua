@@ -1,7 +1,6 @@
 local string_split = require "string_split"
 
 local JPIOT = {}
-
 JPIOT.__index = JPIOT
 
 function JPIOT.new(self)
@@ -10,33 +9,39 @@ function JPIOT.new(self)
    return setmetatable(self, JPIOT)
 end
 
-function JPIOT:feed_list(list, first, last)
+function JPIOT:feed_list(list, weight, first, last)
+   weight = weight or 1
    if last == nil or last then
       table.insert(list, last or ":last:")
    end
    local prev = first or ":first:"
-   for i, el in ipairs(list) do
-      local got = self.words[prev]
-      -- Note: commented out is some stuff for randomly generating that turned
-      --  out unnecessary.
-      if not got then
-         got = {cnts={}, total=0 } --, list={}}
-         self.words[prev] = got
+   if weight <= 0 then -- Negative, Substract.. Needs to take account with disappearance.
+      if weight == 0 then return end  -- This is doing nothing with it.
+      error("not supported yet")
+   else  -- Positive, add.
+      for i, el in ipairs(list) do
+         local got = self.words[prev]
+         -- Note: commented out is some stuff for randomly generating that turned
+         --  out unnecessary.
+         if not got then
+            got = {cnts={}, total=0 } --, list={}}
+            self.words[prev] = got
+         end
+         if not got.cnts[el] then
+            got.cnts[el] = weight
+            --table.insert(got.list, el)
+         else
+            got.cnts[el] = got.cnts[el] + weight
+         end
+         got.total = got.total + weight
+         
+         prev = el
       end
-      if not got.cnts[el] then
-         got.cnts[el] = 1
-         --table.insert(got.list, el)
-      else
-         got.cnts[el] = got.cnts[el] + 1
-      end
-      got.total = got.total + 1
-
-      prev = el
    end
 end
 
-function JPIOT:feed(str, first, last)
-   return self:feed_list(string_split(str), first, last)
+function JPIOT:feed(str, weight, first, last)
+   return self:feed_list(string_split(str), weight, first, last)
 end
 
 local function next_word(words, cnts, i)
@@ -61,5 +66,13 @@ function JPIOT:produce(n, first, random)
    end
    return result
 end
+
+-- TODO produce backwards? Probably much more cpu intensive,
+--  but possible.
+--
+-- Produce based on a set of provided (lowest-probability?)words?
+-- (just generate until you hit one?)
+--
+-- 
 
 return JPIOT
