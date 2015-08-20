@@ -17,6 +17,8 @@ function JPIOT:feed_list(list, first, last)
    local prev = first or ":first:"
    for i, el in ipairs(list) do
       local got = self.words[prev]
+      -- Note: commented out is some stuff for randomly generating that turned
+      --  out unnecessary.
       if not got then
          got = {cnts={}, total=0 } --, list={}}
          self.words[prev] = got
@@ -37,9 +39,8 @@ function JPIOT:feed(str, first, last)
    return self:feed_list(string_split(str), first, last)
 end
 
-local function next_word(words, cur)
-   local i = math.random(cur.total)
-   for new_word, cnt in pairs(cur.cnts) do
+local function next_word(words, cnts, i)
+   for new_word, cnt in pairs(cnts) do
       i = i - cnt
       if i <= 0 then
          return new_word
@@ -48,10 +49,12 @@ local function next_word(words, cur)
    error("total should be equal to sum, so this shouldnt happen")
 end
 
-function JPIOT:produce(n, first)
+function JPIOT:produce(n, first, random)
+   random = random or math.random
    local result, word = {}, first or ":first:"
    while n > 0 do
-      word = next_word(self.words, self.words[word])
+      local cur = self.words[word]
+      word = next_word(self.words, cur.cnts, random(cur.total))
       if word == ":last:" then return result end
       table.insert(result, word)
       n = n - 1
