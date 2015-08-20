@@ -1,4 +1,4 @@
-Nonsense generator! Yet another of a the very same kind.
+Nonsense generator! Yet another of the very same kind.
 
 I am actually all for "putting things out there" it is only *potentially* dumb!
 
@@ -11,5 +11,3 @@ Sentence length is optional, it sees the end of sentences as a thing.
   because it sees lines as sentences.(and no coherence between sentences.)
 
 * I find it surprising that this simple approach works.
-
-* I have nothing against "putting things out there" just a name.
