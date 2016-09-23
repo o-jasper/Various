@@ -8,8 +8,14 @@ function draw_it() {
     ctx.putImageData(imgData, 10, 10); // No idea what the ten stands for.
 }
 
-var pix = imgData.data;
 
+pix = imgData.data;
+
+function reset_canvas() {
+    imgData = ctx.createImageData(w, h);
+    pix = imgData.data;
+    for (var i = 0; i < pix.length; i ++) { pix[i] = 255; }
+}
 for (var i = 0; i < pix.length; i ++) { pix[i] = 255; }
 
 //ctx.putImageData(imgData, 10, 10);
