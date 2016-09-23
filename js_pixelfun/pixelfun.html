@@ -1,0 +1,52 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <title>Pixel fun</title>
+</head>
+<html>
+<body>
+  
+  <table><tr>
+  <td>cnts: <span id="cnts">-</span></td>
+  <td>acts_cnt: <span id="acts_cnt">-</span></td>
+  <td>step_i: <span id="step_i">-</span></td>
+  <td><span id="have_cut">N/A</span></td>
+  </tr></table>
+  <input type="checkbox" id="add_manner">stop previous</input><br>
+  Max concurrent turtles <input id="max_cnt">
+  <p id="option_list">(no interface, likely javascripts)?</p>
+  <noscript><p>No script enabled, if this is your default setting; wise choice! One image</p><img src="pics/fancied.png"></noscript>
+  <p id="setting list"></p>
+
+  <canvas id="work_canvas" width="600" height="600"></canvas>
+
+  <p>Examples(variants)
+  <ul>
+    <li><a href="pixelfun.html?ks=10&ks_min=0&k_sub=6&k_regain=-0.2#dia_city">dia city</a>
+    </li>
+    <li><a href="pixelfun.html?distx=6&disty=4&min_range=8&k_sub=0&init_k=100#cur">cur</a>
+    </li>
+  </ul>
+  </p>
+
+  <a href="http://ojasper.nl//blog/programs/2016/09/22/pixelfun.html">A blog post.</a>
+
+  <script type="text/javascript" src="common.js"></script>
+  
+  <script type="text/javascript" src="util.js"></script>
+  <script type="text/javascript" src="pixelfun.js"></script>
+    
+  <script src="cases/cur.js"></script>
+  <script src="cases/alt.js"></script>
+  <script src="cases/first.js"></script>
+  <script src="cases/halvingstep.js"></script>
+  <script src="cases/horsygrid.js"></script>
+  <script src="cases/collide.js"></script>
+  <script src="cases/fancied.js"></script>
+  <script src="cases/uglytree.js"></script>
+  <script src="cases/dia_city.js"></script>
+  <script src="cases/nothing.js"></script>
+
+  <script src="gui.js"></script>
+</body>
+</html>
