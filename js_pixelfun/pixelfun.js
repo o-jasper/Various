@@ -20,7 +20,7 @@ for (var i = 0; i < pix.length; i ++) { pix[i] = 255; }
 
 //ctx.putImageData(imgData, 10, 10);
 
-function i_of_xy(x,y) { return 4*(x + w * y); }
+function i_of_xy(x,y) { return (4*(x + w * y))%(4*w*h); }
 
 function just_color(self) {
     for( var k = 0 ; k < self.color.length ; k++ ) {
