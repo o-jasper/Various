@@ -19,7 +19,8 @@ function reset_canvas() {
 for (var i = 0; i < pix.length; i ++) { pix[i] = 255; }
 
 //ctx.putImageData(imgData, 10, 10);
-
+function rand_x(){ return Math.floor(w*Math.random()); }
+function rand_y(){ return Math.floor(h*Math.random()); }
 function i_of_xy(x,y) { return (4*(x + w * y))%(4*w*h); }
 
 function just_color(self) {
