@@ -92,7 +92,6 @@ named_patterns.erosion = {
                give:1, take:10,
 
                initial_bottom:127,
-
              },
     setup : function(params) {
         for( var i = 0 ; i<w ; i++ ) {
