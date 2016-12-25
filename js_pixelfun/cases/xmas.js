@@ -9,6 +9,14 @@ function is_empty(k) {
     return pix[k] == 0 && pix[k+1] == 0 && pix[k+2] == 0;
 }
 
+function star(self) {
+    var k = i_of_xy(self.x,self.y);
+    if( is_empty(k) ){ setcolor(k, [255,255,0]); }
+    self.x += self.dx; self.y += self.dy;
+    self.k -= 1;
+    if(self.k > 0){ reg(self); }
+}
+
 function sheen(self) {
     var x = self.x + self.k, y = self.y - self.k;
     var k  = i_of_xy(x,y);
@@ -24,6 +32,14 @@ function sheen(self) {
 	self.x += 1;
 	self.k2 -= 1;
 	reg(self);
+    } else {
+	var x = Math.floor(Math.random()*w), y=Math.floor(Math.random()*w);
+	if(is_empty(i_of_xy(x,y))) {
+	    reg({fun:star, k:self.k_init/1.5, x:x,y:y, dx:0,dy:1});
+	    reg({fun:star, k:self.k_init/1.5, x:x,y:y, dx:0,dy:-1});
+	    reg({fun:star, k:self.k_init/1.5, x:x,y:y, dx:1,dy:0});
+	    reg({fun:star, k:self.k_init/1.5, x:x,y:y, dx:-1,dy:0});
+	}
     }
 }
 
@@ -53,7 +69,7 @@ function ball_place(self, params) {
     self.y += 1;
     self.k -= 1;
     setcolor(i_of_xy(self.x,self.y), [120,120,0]);
-    if(self.k <= 0) { self.fun = ball; self.front = (self.k3%2 == 0); }
+    if(self.k <= 0) { self.fun = ball; self.front = (Math.random()>0.4); }
     reg(self);
 }
 
@@ -89,7 +105,7 @@ function leaf(self, params) {
 }
 
 function branch(self, params) {
-    snow_alloc += 2;    
+    snow_alloc += 1.5;
     self.x += self.dx;
 
     if( Math.random() < params.p_leaf ) {
@@ -141,6 +157,7 @@ function snow(self) {
     while( y < h-1 ){
 	y += 1;
 	var k = i_of_xy(x,y);
+	if( pix[k] == 255 && pix[k+1] == 255 && pix[k+2] == 0 ){ continue; }
 	if( pix[k] != 0 || pix[k+1]!=0 || pix[k+2] != 0) {
 	    snow_alloc -= 1;
 	    reg({fun:snowdrift, x:x,y:y-1});
@@ -148,6 +165,34 @@ function snow(self) {
 	}
     }
     if( self.k>0 ){ reg(self); }
+}
+
+function snow_man(self) {
+    var k = i_of_xy(Math.floor(self.x + self.r*Math.cos(self.a)),
+		    Math.floor(self.y + self.r*Math.sin(self.a)));
+    setcolor(k, self.col);
+    self.a += (self.r==0 ? 1 : 1/(4*Math.PI*self.r));
+    if( self.a > 2*Math.PI ){ self.a = 0; self.r += 1; }
+    if( self.r < self.R ){
+	reg(self);
+    } else if( self.R > 10) {
+	self.y -= self.R;
+	self.R /= 1.5;
+	self.y -= 0.9*self.R;
+	self.r=0; self.a=0;
+	reg(self);
+    } else if(self.s) {
+	self.y += 4*self.R;
+	self.s -= 1;
+	self.r=0; self.a=0;
+	if(self.s>0) { reg(self); }
+    } else if( self.col[0] != 0 ){
+	var d = self.R/2;
+	reg({fun:snow_man, x:self.x+d, y:self.y-d, a:0,r:0,R:2, col:[0,0,0]});
+	reg({fun:snow_man, x:self.x-d, y:self.y-d, a:0,r:0,R:2, col:[0,0,0]});
+
+	reg({fun:snow_man, x:self.x, y:self.y + 2*self.R, a:0,r:0,R:2, col:[100,100,50], s:5});
+    }
 }
 
 named_patterns.xmas = {
@@ -171,5 +216,6 @@ named_patterns.xmas = {
 	for(var n = 0 ; n<100 ; n++){
 	    reg({fun:snow, k:450});
 	}
+	reg({fun:snow_man, x:0.4*w, y:0.9*w, r:0,a:0, R:20, col:[255,255,255]});
     }
 }
