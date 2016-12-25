@@ -1,5 +1,6 @@
-.#*
-*/.#*
+**/.#*
+**/mess
+js_pixelfun/pics/*.png
 en-morse/en-morse
 en-morse/morse-sound
 en-morse/en-morse-sound
