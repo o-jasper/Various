@@ -26,6 +26,3 @@ function gui_sel(name) {
 
     sel_pattern(name, ge("add_manner").checked, qs);
 }
-
-gui_sel(location.hash.substr(1) || "fancied");
-run_continuous();
