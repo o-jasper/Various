@@ -4,5 +4,8 @@ default: all
 clean: 
 	rm prog-select
 
-prog-select: prog-select.c
-	gcc prog-select.c -o prog-select `pkg-config --cflags --libs gtk+-2.0`
+pkg-config-store:  # Store, so dependency not always needed.
+	pkg-config --cflags --libs gtk+-2.0 > pkg-config-store
+
+prog-select: prog-select.c pkg-config-store
+	gcc prog-select.c -o prog-select `cat pkg-config-store`
