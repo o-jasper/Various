@@ -1,27 +1,37 @@
 //  Jasper den Ouden
 // Placed in the Public domain.
 
-w = 600, h = 600;
-var ctx = ge("work_canvas").getContext("2d");
-var imgData = ctx.createImageData(w, h);
-function draw_it() { 
-    ctx.putImageData(imgData, 10, 10); // No idea what the ten stands for.
-}
+w = 600; h = 600;
+var ctx; var imgData;
 
-
-pix = imgData.data;
-
-function reset_canvas() {
+var cvs_cnt = 0;
+function reset_canvas(sw, sh) {
+    w = sw || w; h = sh || h;
+    ge("canvas_container").innerHTML =
+        '<canvas id="work_canvas_' + cvs_cnt + ''
+        + '" width="' + w + '" height="' + h +'"></canvas>'
+    ctx = ge("work_canvas_" + cvs_cnt).getContext("2d");
+    cvs_cnt += 1;
+    ctx.width = w; ctx.height = h;
     imgData = ctx.createImageData(w, h);
     pix = imgData.data;
     for (var i = 0; i < pix.length; i ++) { pix[i] = 255; }
 }
-for (var i = 0; i < pix.length; i ++) { pix[i] = 255; }
+//reset_canvas();
+
+function draw_it() { 
+    ctx.putImageData(imgData, 10, 10); // No idea what the ten stands for.
+}
 
 //ctx.putImageData(imgData, 10, 10);
 function rand_x(){ return Math.floor(w*Math.random()); }
 function rand_y(){ return Math.floor(h*Math.random()); }
-function i_of_xy(x,y) { return (4*(x + w * y))%(4*w*h); }
+var index_modulo = 4*w*h;
+function i_of_xy(x,y) {
+    var r = 4*(x + w * y);
+    while( r < 0 ){ r += 2*index_modulo; }
+    return r%index_modulo;
+}
 
 function just_color(self) {
     for( var k = 0 ; k < self.color.length ; k++ ) {
@@ -66,7 +76,9 @@ function sel_pattern(name, replace, overrides) {
         for(var k in old_params){ cur_params[k] = old_params[k]; }
         for(var k in got.params){ cur_params[k] = got.params[k]; }
     }
-    if(overrides){ for(var k in overrides){ cur_params[k] = parseFloat(overrides[k]); } }
+    if(overrides){
+        for(var k in overrides){ cur_params[k] = parseFloat(overrides[k]); }
+    }
     got.setup(cur_params);
 
     have_cut = false;

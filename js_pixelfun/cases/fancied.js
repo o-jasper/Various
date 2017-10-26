@@ -1,3 +1,5 @@
+// Author: Jasper den Ouden
+
 function fancied_stepper(self, params) {
     if( self.k > 0 ) {
         self.k--;

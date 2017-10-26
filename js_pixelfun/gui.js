@@ -19,10 +19,12 @@ var qs = parse_query(location.search)
 if(qs.max_cnt){ ge("max_cnt").value = qs.max_cnt; }
 if(qs.stop_previous){ ge("add_manner").checked = (qs.stop_previous == "true"); }
 
-function gui_sel(name) {
-    if(ge("reset").checked) {
-        reset_canvas();
-    }
+var first_run = true;
 
+function gui_sel(name) {
+    if(ge("reset").checked || first_run) {
+        first_run = false;
+        reset_canvas(parseInt(qs.w) || w, parseInt(qs.h) || h);
+    }
     sel_pattern(name, ge("add_manner").checked, qs);
 }

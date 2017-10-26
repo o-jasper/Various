@@ -15,14 +15,14 @@ function simplebot(self, params) {
     }
 //    alert(self.dir + ":" + dx + " " + dy);
 
-    var x = self.x, y = self.y;
-    var fi = i_of_xy(x + dx, y + dy);
-    var ri = i_of_xy(x + dx + dy, y + dy + dx);
-    var li = i_of_xy(x + dx - dy, y + dy - dx);
+    var x = self.x, y = self.y; // "eyes"
+    var fi = i_of_xy(x + dx, y + dy); // Forward
+    var ri = i_of_xy(x + dx + dy, y + dy + dx); // right(or left, whatevs)
+    var li = i_of_xy(x + dx - dy, y + dy - dx); // ..
 
-    var fv = (pix[fi+1] == 255 ? 1 : 0);
-    var rv = (pix[ri+1] == 255 ? 1 : 0);
-    var lv = (pix[li+1] == 255 ? 1 : 0);
+    var fv = (pix[fi+1] > 127 ? 1 : 0); // 0/1 values of three eyes.
+    var rv = (pix[ri+1] > 127 ? 1 : 0);
+    var lv = (pix[li+1] > 127 ? 1 : 0);
     self.sel += fv + 2*rv * 4*lv;
     var arr = self.arr;
     var choose = 1 + arr[0]*fv + arr[1]*rv + arr[2]*lv
@@ -34,7 +34,7 @@ function simplebot(self, params) {
     self.x += dx; self.y += dy;
     if( fv == 1 ) { // Eat one.
         pix[fi] = 0; pix[fi+1] = 0; pix[fi+2] = 0;
-        self.food += 1;
+        self.food += params.bite;
         if( self.food > params.reprod ){  // Reproduce.
             self.food -= params.reprod;
             var new_arr = [];  // Copy array, pick one to change.
@@ -43,8 +43,10 @@ function simplebot(self, params) {
             pix[fi+2] = 255;
             got.reg_prod(x,y, self.dir + 2, new_arr);
         }
+        self.age += params.age_feed;
+    } else {
+        self.age += params.age_starve;
     }
-    self.age += 1;
     if( self.age > params.max_age ){
         pix[fi] = 255;  // Die, leave mark.
     } else {
@@ -63,7 +65,8 @@ named_patterns.simplebot = {
     params : {
         init_x : w/2, init_y : h/2,
         max_age :120,
-        reprod : 10
+        reprod : 10,
+        bite :1, age_starve:1, age_feed:1,
     },
     setup : function(params) {
         reg({fun:simplebot, x:params.init_x, y:params.init_y, dir:0,
