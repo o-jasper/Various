@@ -8,9 +8,9 @@ function alt_rect_round(self, d, col) {
 }
 
 function alt_split_off(self, set) {
-    var a = {dx:-self.dy, dy:+self.dx, x:self.x, y:self.y, 
+    var a = {dx:-self.dy, dy:+self.dx, x:self.x, y:self.y,
              k:self.init_k, init_k:self.init_k};
-    var b = {dx:+self.dy, dy:-self.dx, x:self.x, y:self.y, 
+    var b = {dx:+self.dy, dy:-self.dx, x:self.x, y:self.y,
              k:self.init_k, init_k:self.init_k};
     for( k in set){ a[k] = set[k]; b[k] = set[k]; }
     reg(a); reg(b);
@@ -43,7 +43,7 @@ function alt_stepper_b(self) {
         self.x += self.dx;
         self.y += self.dy;
         var i = i_of_xy(self.x, self.y);
-        if(pix[i] == 255 && pix[i+1] == 0 && pix[i+2] == 0 || 
+        if(pix[i] == 255 && pix[i+1] == 0 && pix[i+2] == 0 ||
            self.k == self.init_k/2 ) {
             self.fun = alt_stepper_r_splode;
             if( self.k != self.init_k/2 ){ rect_round(self, 1, [255,0,0]); }

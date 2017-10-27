@@ -20,7 +20,7 @@ function cur_diag(self, params) {
 
 function cur_diag_splode(self) {
     function add(dx,dy) {
-        reg({fun:cur_diag, x:self.x + dx, y:self.y + dy, dx:dx,dy:dy, 
+        reg({fun:cur_diag, x:self.x + dx, y:self.y + dy, dx:dx,dy:dy,
              k:self.init_k, init_k:self.init_k})
     }
     add(1,-1);  add(1,1);
@@ -49,7 +49,7 @@ function cur_stepper(self) {
 
 function cur_stepper_splode(self) {
     function add(dx,dy) {
-        reg({fun:cur_stepper, x:self.x, y:self.y, dx:dx,dy:dy, 
+        reg({fun:cur_stepper, x:self.x, y:self.y, dx:dx,dy:dy,
              k:self.init_k, init_k:self.init_k})
     }
     add(0,1);  add(1,0);

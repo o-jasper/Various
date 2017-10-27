@@ -27,7 +27,8 @@ function dia_city_diag(self, params) {
 named_patterns.dia_city = {
     params : { ks:32, k_sub:3, k_regain:0, ks_min:2, inba:0},
     setup : function(params) {
-        reg({fun:dia_city_diag, x:w/2, y:h/2, dx:-1, dy:1, k:params.ks, ks : params.ks});
+        reg({fun:dia_city_diag, x:w/2, y:h/2, dx:-1, dy:1,
+             k:params.ks, ks : params.ks});
     }
 }
 

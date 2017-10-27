@@ -19,7 +19,7 @@ function collide_diag(self, params) {
 
 function collide_diag_splode(self) {
     function add(dx,dy) {
-        reg({fun:collide_diag, x:self.x + dx, y:self.y + dy, dx:dx,dy:dy, 
+        reg({fun:collide_diag, x:self.x + dx, y:self.y + dy, dx:dx,dy:dy,
              k:self.init_k, init_k:self.init_k})
     }
     add(1,-1);  add(1,1);
@@ -48,7 +48,7 @@ function collide_stepper(self) {
 
 function collide_stepper_splode(self) {
     function add(dx,dy) {
-        reg({fun:collide_stepper, x:self.x, y:self.y, dx:dx,dy:dy, 
+        reg({fun:collide_stepper, x:self.x, y:self.y, dx:dx,dy:dy,
              k:self.init_k, init_k:self.init_k})
     }
     add(0,1);  add(1,0);
