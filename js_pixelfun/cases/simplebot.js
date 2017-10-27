@@ -3,8 +3,6 @@
 // Simple "evolving" bots that choose to go right or left and eat where they go.
 // self.sel selects what parameter to evolve.
 
-var got = {}
-
 function simplebot(self, params) {
     var dx = null, dy = null;
     switch( self.dir%4 ) {
@@ -41,24 +39,22 @@ function simplebot(self, params) {
             for( var k in arr){ new_arr[k] = arr[k]; }
             new_arr[self.sel%7] += 1;
             pix[fi+2] = 255;
-            got.reg_prod(x,y, self.dir + 2, new_arr);
+            self.food -= params.pass_food;
+            reg({fun:simplebot, x:x, y:y, dir:(self.dir + 2),
+                 age:0, food: params.pass_food,
+                 arr : new_arr, sel:0
+                });
         }
         self.age += params.age_feed;
     } else {
+        self.food -= params.hunger;
         self.age += params.age_starve;
     }
-    if( self.age > params.max_age ){
+    if( self.age > params.max_age || self.food < 0 ){
         pix[fi] = 255;  // Die, leave mark.
     } else {
         reg(self);  // Still alive.
     }
-}
-
-got.reg_prod = function(x,y,dir, new_arr) {
-    reg({fun:simplebot, x:x, y:y, dir:dir,
-         age:0, food:0,
-         arr : new_arr, sel:0
-        });
 }
 
 named_patterns.simplebot = {
@@ -66,11 +62,12 @@ named_patterns.simplebot = {
         init_x : w/2, init_y : h/2,
         max_age :120,
         reprod : 10,
-        bite :1, age_starve:1, age_feed:1,
+        pass_food : 0, init_food : 0,
+        bite :1, age_starve:1, age_feed:1, hunger:0,
     },
     setup : function(params) {
         reg({fun:simplebot, x:params.init_x, y:params.init_y, dir:0,
-             age:0, food:0,
+             age:0, food:params.init_food,
              arr : [0,1,1,1,1,1,0], sel:0,
             });
     }
