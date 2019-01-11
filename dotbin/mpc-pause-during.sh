@@ -1,4 +1,5 @@
 #!/bin/bash
+# WARNING this actually sucks! `xsel` could output something that executes arbitrary code!!
 
 if [ $1 == "wait" ]; then
     mpc current --wait
@@ -11,7 +12,7 @@ if [ $VID == "sel" ]; then
 elif [ "$VID" == 'clip' ]; then
     VID=$(xsel -b)
 fi
-#echo $VID >> /tmp/pause-during
-DISPLAY=:2 lns-trick mpv mpv --fullscreen --force-window $VID
+
+mpv --fullscreen --force-window $VID
 
 mpc play
